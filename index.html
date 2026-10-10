@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<title>Cartilla UNAD | Docencia pública con responsabilidad | Jaime Luis Hernández Burgos</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 10.5pt;
+      line-height: 1.32;
+      color: #435466; /* Gris pizarra */
+      background-color: #EDF2F5;
+    }
+
+    .page {
+      width: 210mm;
+      height: 297mm;
+      margin: 0 auto 10mm auto;
+      padding: 16mm 15mm 16mm 17mm; /* Márgenes calibrados A4 */
+      background-color: #FAFBFC; /* Blanco cálido */
+      position: relative;
+      page-break-after: always;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    }
+
+    @media print {
+      body {
+        background-color: transparent;
+      }
+      .page {
+        margin: 0;
+        box-shadow: none;
+      }
+    }
+
+    /* ENCABEZADOS Y PIES DE PÁGINA */
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1.5px solid #168C85;
+      padding-bottom: 5px;
+      margin-bottom: 14px;
+      font-size: 8.5pt;
+      font-weight: 600;
+      color: #163A53;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .page-header span.doc-title {
+      color: #245C7A;
+    }
+
+    .page-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid #D6A64B;
+      padding-top: 5px;
+      margin-top: 10px;
+      font-size: 8.5pt;
+      color: #435466;
+    }
+
+    .page-number {
+      font-weight: 700;
+      color: #163A53;
+      background: #EDF2F5;
+      padding: 2px 8px;
+      border-radius: 4px;
+      border-left: 3px solid #D6A64B;
+    }
+
+    /* CONTENEDOR Y JERARQUÍAS */
+    .content-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    h1, h2, h3, h4 {
+      color: #163A53;
+      margin: 0 0 8px 0;
+      font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    }
+
+    h1.page-title {
+      font-size: 19pt;
+      font-weight: 800;
+      line-height: 1.15;
+      color: #163A53;
+      border-left: 5px solid #168C85;
+      padding-left: 10px;
+      margin-bottom: 12px;
+    }
+
+    h2.section-subtitle {
+      font-size: 12.5pt;
+      font-weight: 700;
+      color: #245C7A;
+      margin-top: 4px;
+      margin-bottom: 6px;
+    }
+
+    h3.block-title {
+      font-size: 11pt;
+      font-weight: 600;
+      color: #163A53;
+      margin-bottom: 4px;
+    }
+
+    p {
+      margin: 0 0 8px 0;
+      text-align: justify;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* SISTEMAS DE COLUMNAS Y GRILLAS */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+    }
+
+    .grid-2-unequal {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 12px;
+    }
+
+    /* RECUADROS DIDÁCTICOS RECURRENTES */
+    .box-didactic {
+      border-radius: 6px;
+      padding: 8px 11px;
+      margin: 7px 0;
+      font-size: 9.8pt;
+      line-height: 1.28;
+      border-left: 4px solid;
+    }
+
+    .box-concepto {
+      background-color: #EDF2F5;
+      border-color: #163A53;
+    }
+    .box-concepto .box-label {
+      color: #163A53;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 8.5pt;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 3px;
+    }
+
+    .box-escuela {
+      background-color: #EBF5F4;
+      border-color: #168C85;
+    }
+    .box-escuela .box-label {
+      color: #168C85;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 8.5pt;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 3px;
+    }
+
+    .box-tenga {
+      background-color: #FDF8ED;
+      border-color: #D59A30;
+    }
+    .box-tenga .box-label {
+      color: #9C6C15;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 8.5pt;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 3px;
+    }
+
+    .box-reflexion {
+      background-color: #F4F6F8;
+      border-color: #435466;
+    }
+    .box-reflexion .box-label {
+      color: #435466;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 8.5pt;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 3px;
+    }
+
+    /* TABLAS ESTILIZADAS */
+    table.editorial-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 8px 0;
+      font-size: 9.2pt;
+      line-height: 1.22;
+    }
+
+    table.editorial-table th {
+      background-color: #163A53;
+      color: #FAFBFC;
+      font-weight: 600;
+      text-align: left;
+      padding: 6px 8px;
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+    }
+
+    table.editorial-table td {
+      padding: 6px 8px;
+      border-bottom: 1px solid #DCE4E8;
+      vertical-align: top;
+      color: #435466;
+    }
+
+    table.editorial-table tr:nth-child(even) td {
+      background-color: #F7FAFC;
+    }
+
+    /* FICHAS Y TARJETAS */
+    .card-item {
+      background: #FFFFFF;
+      border: 1px solid #DCE4E8;
+      border-radius: 6px;
+      padding: 9px 11px;
+      margin-bottom: 8px;
+    }
+
+    .card-item.accent-border {
+      border-top: 3px solid #168C85;
+    }
+
+    .card-item.gold-border {
+      border-top: 3px solid #D6A64B;
+    }
+
+    .card-item.blue-border {
+      border-top: 3px solid #245C7A;
+    }
+
+    .badge-regimen {
+      display: inline-block;
+      font-size: 7.5pt;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 3px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .badge-1278 {
+      background-color: #E2F0ED;
+      color: #168C85;
+    }
+
+    .badge-general {
+      background-color: #EAEFF4;
+      color: #245C7A;
+    }
+
+    .badge-2277 {
+      background-color: #F8F0DE;
+      color: #9C6C15;
+    }
+
+    /* ESTILOS DE PORTADA Y CONTRAPORTADA */
+    .page-cover {
+      background: linear-gradient(145deg, #163A53 0%, #0D2333 100%);
+      color: #FAFBFC;
+      padding: 22mm 18mm 18mm 18mm;
+      justify-content: space-between;
+    }
+
+    .page-backcover {
+      background: linear-gradient(145deg, #0E2637 0%, #163A53 100%);
+      color: #FAFBFC;
+      padding: 20mm 18mm 18mm 18mm;
+    }
+
+    .cover-header-tag {
+      font-size: 10pt;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      color: #D6A64B;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: inline-block;
+      border-bottom: 2px solid #D6A64B;
+      padding-bottom: 4px;
+    }
+
+    .cover-title {
+      font-size: 29pt;
+      font-weight: 800;
+      line-height: 1.1;
+      color: #FFFFFF;
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+
+    .cover-subtitle {
+      font-size: 13.5pt;
+      font-weight: 400;
+      line-height: 1.35;
+      color: #EDF2F5;
+      margin-bottom: 24px;
+      max-width: 90%;
+    }
+
+    .cover-meta {
+      border-top: 1px solid rgba(214, 166, 75, 0.4);
+      padding-top: 14px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 9.5pt;
+      color: #EDF2F5;
+    }
+
+    /* DIAGRAMAS SVG E ILUSTRACIONES */
+    .svg-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 8px 0;
+    }
+  
+/* EDICIÓN EDITORIAL UNAD 2026 */
+:root{--navy:#143a59;--blue:#17669a;--orange:#f2a900;--teal:#087c83;--ink:#263747;--paper:#fffefb}
+body{color:var(--ink);background:#d9e2e9;font-size:10.5pt;line-height:1.39}
+.page{background:var(--paper);padding:15mm 16mm 15mm 17mm;box-shadow:0 9px 35px #123a5630;justify-content:flex-start;gap:0}
+.content-body{justify-content:flex-start;gap:9px}
+.page-header{border-bottom:2px solid var(--orange);margin-bottom:12px;padding-bottom:7px;letter-spacing:.25px}
+.page-header:before{content:'';display:block;width:7px;height:7px;border-radius:50%;background:var(--orange);margin-right:7px}
+.page-footer{margin-top:auto;padding-top:8px;border-top:1px solid #b7c9d5}
+h1.page-title{font-size:19.5pt;border-left:5px solid var(--orange);padding-left:12px;margin:1px 0 12px;line-height:1.15;letter-spacing:-.5px}
+h2.section-subtitle{font-size:12pt;color:var(--blue)}
+p{text-align:left;line-height:1.43;margin-bottom:8px;hyphens:auto}
+.card-item{border:1px solid #d8e3e9;border-radius:9px;padding:10px 12px;background:#fff;box-shadow:0 2px 0 #edf3f6}
+.card-item.accent-border{border-top:4px solid var(--teal)}
+.card-item.gold-border{border-top:4px solid var(--orange)}
+.card-item.blue-border{border-top:4px solid var(--blue)}
+.box-didactic{border-radius:8px;padding:10px 13px;line-height:1.4}
+.box-escuela{background:#e8f6f5}.box-tenga{background:#fff5dc}
+table.editorial-table{font-size:9.1pt;line-height:1.34}table.editorial-table th{background:var(--navy);padding:9px 8px}table.editorial-table td{padding:8px}
+.page-cover{background:linear-gradient(155deg,#102e4a,#0d5279 65%,#0b6978);padding:17mm 18mm 17mm;gap:15px}
+.page-backcover{background:linear-gradient(145deg,#12344d,#154a68)}
+.cover-title{font-size:32pt;line-height:1.08;letter-spacing:-1px}.cover-header-tag{color:#ffcb50;border-color:#ffcb50}
+.cover-meta{display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:9pt}
+.brand-lockup{display:flex;align-items:center;gap:14px;background:#fff;border-radius:9px;padding:9px 14px;max-width:100%;margin-bottom:22px}
+.brand-lockup img{display:block;width:100%;max-height:58px;object-fit:contain;object-position:left}
+.identity-block{background:rgba(255,255,255,.1);border-left:4px solid var(--orange);border-radius:4px;padding:11px 14px;margin-top:12px;font-size:9.2pt;line-height:1.5;color:white}
+.identity-block strong{color:#ffd16c}
+.chapter-kicker{font-size:8pt;text-transform:uppercase;letter-spacing:1.6px;font-weight:800;color:#b67800;margin-bottom:3px}
+.editorial-band{background:linear-gradient(110deg,#e9f3f8,#f7fafb);border-left:4px solid var(--orange);padding:11px 14px;border-radius:6px;margin:9px 0}
+.editorial-band strong{color:var(--navy)}
+.visual-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:10px 0}
+.visual-step{background:#e8f1f5;border-top:4px solid var(--teal);padding:10px 8px;border-radius:6px;font-size:8.7pt;line-height:1.3}
+.visual-step b{display:block;font-size:10pt;color:var(--navy);margin-bottom:4px}
+.case-matrix{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:7px 0}
+.case-matrix>div{padding:8px 10px;background:#edf4f7;border-radius:6px;font-size:9pt}
+.case-matrix strong{display:block;color:var(--navy);margin-bottom:3px}
+.school-ribbon{display:flex;gap:8px;align-items:center;padding:9px 12px;border-radius:7px;background:#eaf5f4;font-size:9.4pt;margin-top:7px}
+.school-ribbon:before{content:'✓';background:var(--teal);color:white;border-radius:50%;font-weight:800;padding:4px 8px}
+@media print{body{background:white}.page{box-shadow:none;break-after:page;page-break-after:always}a{color:inherit;text-decoration:none}}
+@media screen and (max-width:850px){.page{transform-origin:top left;margin-left:auto;margin-right:auto}}
+
+/* Edición editorial 2026 */
+.page { justify-content: flex-start; }
+.page .content-body { justify-content: flex-start; gap: 12px; }
+.page-header { flex-shrink:0; }
+.page-footer { margin-top:auto; flex-shrink:0; }
+.editorial-kicker { font-size:9pt; letter-spacing:1.5px; text-transform:uppercase; color:#168C85; font-weight:800; }
+.editorial-title { font-size:26pt; line-height:1.12; color:#163A53; margin:9px 0 15px; }
+.editorial-lead { font-size:11pt; line-height:1.55; color:#435466; max-width:95%; }
+.credit-grid { display:grid; grid-template-columns: 1fr 1fr; gap:14px; margin:20px 0; }
+.credit-block { padding:13px 15px; border-top:3px solid #168C85; background:white; }
+.credit-block small { color:#245C7A; font-weight:700; text-transform:uppercase; letter-spacing:.6px; }
+.credit-block p { margin-top:7px; text-align:left; }
+.toc-section { margin:12px 0 22px; }
+.toc-heading { color:#168C85; font-weight:800; font-size:10pt; letter-spacing:1px; text-transform:uppercase; margin:12px 0 8px; }
+.toc-line { display:flex; align-items:baseline; gap:9px; padding:8px 0; border-bottom:1px solid #dce4e8; color:#163A53; text-decoration:none; font-size:10pt; }
+.toc-line .dots { flex:1; border-bottom:1px dotted #9aaab3; height:1px; }
+.toc-line .num { font-weight:800; color:#168C85; min-width:22px; text-align:right; }
+.page-cover { justify-content:space-between; }
+.page-cover .cover-title { font-size:31pt; }
+.page-backcover { justify-content:space-between; }
+.ref-list p { text-align:left; font-size:9pt; line-height:1.4; margin:0 0 12px; padding-left:12px; text-indent:-12px; }
+.section-band { padding:12px 16px; background:#163A53; color:white; border-left:5px solid #efaa23; margin:10px 0; }
+.section-band strong { color:white; }
+@media screen { body {padding:16px 0;} .page {margin-bottom:16px;} }
+@media print { .page { margin:0!important; break-after:page; page-break-after:always; box-shadow:none!important; } .page:last-child {break-after:auto;page-break-after:auto;} }
+</style>
+<style>
+/* Tercera edición: módulos pedagógicos para ocupar el espacio con información útil */
+.learning-panel{margin-top:12px;background:#f0f6f8;border:1px solid #d5e5e9;border-left:4px solid #e99d21;border-radius:7px;padding:11px 13px;color:#254356;break-inside:avoid}
+.learning-head{display:flex;align-items:center;gap:10px;margin-bottom:7px;color:#163a53;font-size:10.3pt}
+.learning-mark{background:#163a53;color:white;padding:4px 6px;border-radius:3px;font-size:7pt;letter-spacing:.6px;font-weight:800;white-space:nowrap}
+.learning-panel p{font-size:9.2pt;line-height:1.43;text-align:left;margin:0 0 7px}
+.learning-note{font-size:8.5pt;line-height:1.35;border-top:1px solid #c9dce3;padding-top:6px;color:#435466}
+#contenido .toc-line{padding:5px 0;font-size:9.3pt}
+#contenido .toc-heading{margin:8px 0 5px}
+#contenido .toc-section{margin:5px 0 8px}
+#contenido .content-body{gap:5px}
+#contenido .editorial-title{margin:4px 0 6px}
+#contenido .editorial-lead{font-size:9.6pt;line-height:1.4;margin-bottom:4px}
+@media print{.learning-panel{break-inside:avoid;page-break-inside:avoid}}
+</style></head>
+<body>
+<!-- ========================================== -->
+<!-- PÁGINA 1: PORTADA                          -->
+<!-- ========================================== -->
+<div class="page page-cover" data-page="1" id="pagina-1"><div class="brand-lockup"><img alt="Logotipo de la Universidad Nacional Abierta y a Distancia UNAD" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAb8AAABOCAMAAACHdOhIAAAyGGlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS4zLWMwMTEgNjYuMTQ1NjYxLCAyMDEyLzAyLzA2LTE0OjU2OjI3ICAgICAgICAiPgogICA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogICAgICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgICAgICAgICB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iPgogICAgICAgICA8eG1wOkNyZWF0b3JUb29sPkFkb2JlIEZpcmV3b3JrcyBDUzYgKFdpbmRvd3MpPC94bXA6Q3JlYXRvclRvb2w+CiAgICAgICAgIDx4bXA6Q3JlYXRlRGF0ZT4yMDIyLTAyLTAyVDAwOjE5OjIwWjwveG1wOkNyZWF0ZURhdGU+CiAgICAgICAgIDx4bXA6TW9kaWZ5RGF0ZT4yMDIyLTAyLTAyVDAwOjE5OjUxWjwveG1wOk1vZGlmeURhdGU+CiAgICAgIDwvcmRmOkRlc2NyaXB0aW9uPgogICAgICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgICAgICAgICB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iPgogICAgICAgICA8ZGM6Zm9ybWF0PmltYWdlL3BuZzwvZGM6Zm9ybWF0PgogICAgICA8L3JkZjpEZXNjcmlwdGlvbj4KICAgPC9yZGY6UkRGPgo8L3g6eG1wbWV0YT4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg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"/></div>
+<div>
+<div class="cover-header-tag">PEDAGOGÍA EN DERECHOS · CONSULTORIO JURÍDICO PÚBLICO</div>
+<h1 class="cover-title">DOCENCIA PÚBLICA CON RESPONSABILIDAD</h1>
+<div class="cover-subtitle">Guía práctica sobre principios de la función administrativa, deberes y responsabilidad disciplinaria del docente oficial</div>
+</div>
+<!-- Ilustración vectorial central de contexto escolar colombiano -->
+<div class="svg-container" style="margin: 15px 0;">
+<div style="width:100%;border:1px solid #6ca5bc;border-radius:12px;padding:18px 20px;background:linear-gradient(125deg,#195878,#0d394f)"><div style="font-size:9pt;letter-spacing:2px;color:#ffc955;font-weight:800;margin-bottom:16px">UNA GUÍA PARA DECIDIR CON CRITERIO</div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px"><div style="border-top:3px solid #ffc955;padding:13px 5px;color:white"><div style="font-size:28pt;font-weight:800">01</div><div style="font-size:11pt;font-weight:700">PRINCIPIOS</div><div style="font-size:9pt">Servicio a la comunidad</div></div><div style="border-top:3px solid #69c4b8;padding:13px 5px;color:white"><div style="font-size:28pt;font-weight:800">02</div><div style="font-size:11pt;font-weight:700">DEBERES</div><div style="font-size:9pt">Ejercicio responsable</div></div><div style="border-top:3px solid #ffc955;padding:13px 5px;color:white"><div style="font-size:28pt;font-weight:800">03</div><div style="font-size:11pt;font-weight:700">GARANTÍAS</div><div style="font-size:9pt">Debido proceso</div></div></div><div style="font-size:9pt;color:#e8f1f6;margin-top:18px">Normas, situaciones escolares y orientaciones preventivas</div></div>
+</div>
+<div>
+<div style="background: rgba(255,255,255,0.08); padding: 10px 14px; border-radius: 5px; margin-bottom: 15px;">
+<span style="font-size: 8.5pt; color: #D6A64B; font-weight: 700; text-transform: uppercase;">Proyecto de pedagogía jurídica</span>
+<p style="font-size: 9pt; color: #FAFBFC; margin: 2px 0 0 0;">Principios de la función administrativa y responsabilidad disciplinaria del docente como servidor público: estrategia de pedagogía jurídica en una institución educativa oficial.</p>
+</div>
+<div class="identity-block"><strong>UNAD · Escuela de Ciencias Jurídicas y Políticas</strong><br/>Programa de Derecho · Consultorio Jurídico Público<br/>Material pedagógico elaborado por estudiante. No constituye publicación institucional oficialmente avalada.</div><div class="cover-meta"><div>Jaime Luis Hernández Burgos</div><div>Estudiante de Derecho · Consultorio Jurídico Público</div><div>Universidad Nacional Abierta y a Distancia – UNAD</div><div>Montería, Córdoba · 2026</div></div>
+</div>
+</div><div class="page editorial-front" data-page="2" id="creditos">
+<div class="page-header"><span class="doc-title">UNAD · Consultorio Jurídico Público</span><span>Ficha editorial</span></div>
+<div class="content-body"><div class="editorial-kicker">Información de la publicación</div><h1 class="editorial-title">Créditos y ficha editorial</h1>
+<p class="editorial-lead">Material de pedagogía en derechos dirigido a docentes y directivos docentes de instituciones educativas oficiales de Colombia. Su propósito es facilitar una lectura preventiva, práctica y garantista del régimen jurídico de la función docente.</p>
+<div class="credit-grid"><div class="credit-block"><small>Autor y elaboración</small><p><strong>Jaime Luis Hernández Burgos</strong><br/>Estudiante del Programa de Derecho<br/>Consultorio Jurídico Público</p></div><div class="credit-block"><small>Vinculación académica</small><p><strong>Universidad Nacional Abierta y a Distancia — UNAD</strong><br/>Escuela de Ciencias Jurídicas y Políticas</p></div><div class="credit-block"><small>Título</small><p>Docencia pública con responsabilidad. Guía práctica sobre principios, deberes y responsabilidad disciplinaria del docente oficial.</p></div><div class="credit-block"><small>Edición</small><p>Primera edición de trabajo · 2026<br/>Montería, Córdoba, Colombia<br/>Formato A4 · distribución educativa</p></div></div>
+<div class="section-band"><strong>Nota editorial</strong><div style="font-size:9pt;margin-top:6px">Esta cartilla es un material académico de elaboración estudiantil. La identificación de la UNAD corresponde a la vinculación académica del autor y no implica, por sí sola, aprobación editorial o concepto jurídico oficial de la Universidad.</div></div>
+<h2 class="section-subtitle">Alcance de la publicación</h2><p>La información es orientativa y no reemplaza el examen de los hechos, la consulta de normas vigentes ni la asesoría jurídica individual. Los casos presentados son hipotéticos y no constituyen decisiones disciplinarias.</p>
+</div><div class="page-footer"><span>Pedagogía en Derechos · Edición 2026</span><span class="page-number">2</span></div></div><div class="page" data-page="3" id="contenido">
+<div class="page-header"><span class="doc-title">Docencia pública con responsabilidad</span><span>Guía de lectura</span></div>
+<div class="content-body"><div class="editorial-kicker">Orientación para el lector</div><h1 class="editorial-title">Tabla de contenido</h1>
+<p class="editorial-lead">Consulte las secciones temáticas y sus páginas. Seleccione un título para acceder directamente al contenido.</p>
+<div class="toc-section" id="toc-list"><div class="toc-heading">Introducción</div><a class="toc-line" href="#pagina-4"><span>Presentación y propósito</span><span class="dots"></span><span class="num">04</span></a><div class="toc-heading">Fundamentos</div><a class="toc-line" href="#pagina-5"><span>El docente como servidor público</span><span class="dots"></span><span class="num">05</span></a><a class="toc-line" href="#pagina-6"><span>Principios de la función administrativa</span><span class="dots"></span><span class="num">06</span></a><a class="toc-line" href="#pagina-7"><span>Los principios en la vida escolar</span><span class="dots"></span><span class="num">07</span></a><a class="toc-line" href="#pagina-8"><span>Deberes de docentes y directivos</span><span class="dots"></span><span class="num">08</span></a><a class="toc-line" href="#pagina-9"><span>Prohibiciones y conflictos de intereses</span><span class="dots"></span><span class="num">09</span></a><div class="toc-heading">Responsabilidad y garantías</div><a class="toc-line" href="#pagina-10"><span>Responsabilidad disciplinaria</span><span class="dots"></span><span class="num">10</span></a><a class="toc-line" href="#pagina-11"><span>Acción, omisión y extralimitación</span><span class="dots"></span><span class="num">11</span></a><a class="toc-line" href="#pagina-12"><span>Ilicitud sustancial y culpabilidad</span><span class="dots"></span><span class="num">12</span></a><a class="toc-line" href="#pagina-13"><span>Faltas y sanciones disciplinarias</span><span class="dots"></span><span class="num">13</span></a><a class="toc-line" href="#pagina-14"><span>Garantías procesales</span><span class="dots"></span><span class="num">14</span></a><div class="toc-heading">Aplicación y consulta</div><a class="toc-line" href="#pagina-15"><span>Casos prácticos I</span><span class="dots"></span><span class="num">15</span></a><a class="toc-line" href="#pagina-16"><span>Casos prácticos II</span><span class="dots"></span><span class="num">16</span></a><a class="toc-line" href="#pagina-17"><span>Decálogo y autoevaluación</span><span class="dots"></span><span class="num">17</span></a><a class="toc-line" href="#referencias"><span>Referencias normativas</span><span class="dots"></span><span class="num">18</span></a></div>
+<div class="box-didactic box-escuela"><div class="box-label">Cómo utilizar esta cartilla</div><p>Lea primero los conceptos fundamentales y luego los casos prácticos. Las preguntas de reflexión están pensadas para discutirlas durante la capacitación; no constituyen pruebas de responsabilidad disciplinaria.</p></div>
+</div><div class="page-footer"><span>Índice de contenidos</span><span class="page-number">3</span></div></div>
+<!-- ========================================== -->
+<!-- PÁGINA 2: PRESENTACIÓN Y PROPÓSITO         -->
+<!-- ========================================== -->
+<div class="page" data-page="4" id="pagina-4">
+<div class="page-header">
+<span class="doc-title">Docencia Pública con Responsabilidad</span>
+<span>Presentación y Propósito • Pág. 4</span>
+</div>
+<div class="content-body">
+<div>
+<h1 class="page-title">Presentación y Sentido Pedagógico</h1>
+<p>El ejercicio docente en el sector oficial colombiano trasciende la instrucción académica: encarna la garantía efectiva del derecho fundamental a la educación (art. 67 C.P.) y la materialización de los fines esenciales del Estado (art. 2 C.P.). Por ende, el educador estatal está investido de la condición de <strong>servidor público</strong> (art. 123 C.P.), sometido a un régimen jurídico de deberes, prohibiciones e inhabilidades orientado a garantizar la moralidad, eficacia y transparencia institucional.</p>
+<p>Esta cartilla nace como una herramienta formativa y preventiva concebida para superar la visión punitiva del derecho disciplinario. Conocer los principios rectores de la función administrativa y las bases del <strong>Código General Disciplinario (Ley 1952 de 2019, modificada por la Ley 2094 de 2021)</strong> no constituye una carga burocrática, sino un blindaje ético y legal que ampara el ejercicio profesional docente, delimitando con precisión las competencias funcionales y garantizando el debido proceso sustancial.</p>
+</div>
+<div class="box-didactic box-concepto">
+<div class="box-label">¿Qué aprenderá con esta cartilla?</div>
+<p>A través de un recorrido estructurado en secciones temáticas y casos prácticos, el docente y directivo docente comprenderá cómo articular los mandatos constitucionales con su cotidianidad de aula; aprenderá a distinguir entre una dificultad pedagógica, un conflicto laboral y una falta disciplinaria; y reconocerá las garantías procesales que lo asisten en el marco del Estado Social de Derecho.</p>
+</div>
+<div>
+<h2 class="section-subtitle">Resultados de Aprendizaje Esperados</h2>
+<div class="grid-3" style="margin-top: 6px;">
+<div class="card-item accent-border">
+<strong style="color: #168C85; font-size: 9.5pt;">RA-1: Identificar</strong>
+<p style="font-size: 8.8pt; margin-top: 4px;">Reconocer con precisión los principios de la función administrativa (art. 209 C.P.) y los deberes funcionales aplicables a los docentes y directivos oficiales.</p>
+</div>
+<div class="card-item gold-border">
+<strong style="color: #9C6C15; font-size: 9.5pt;">RA-2: Diferenciar</strong>
+<p style="font-size: 8.8pt; margin-top: 4px;">Distinguir entre riesgos de gestión escolar, posibles conductas de relevancia disciplinaria y situaciones eximentes de responsabilidad según la ilicitud sustancial y la culpabilidad.</p>
+</div>
+<div class="card-item blue-border">
+<strong style="color: #245C7A; font-size: 9.5pt;">RA-3: Aplicar</strong>
+<p style="font-size: 8.8pt; margin-top: 4px;">Ejercer pautas preventivas y defensivas en la toma de decisiones curriculares, directivas y de convivencia escolar, reconociendo las garantías del debido proceso y la integridad del servicio.</p>
+</div>
+</div>
+</div>
+<div class="box-didactic box-reflexion">
+<div class="box-label">Para Reflexionar</div>
+<p>¿Es el derecho disciplinario un mecanismo de sanción o una garantía para que la educación oficial preserve su legitimidad democrática y proteja los derechos de la comunidad educativa?</p>
+</div>
+<section class="learning-panel"><div class="learning-head"><span class="learning-mark">PARA APLICAR</span><strong>Ruta de aprendizaje</strong></div><p><b>Antes:</b> identifique una decisión escolar que le haya generado dudas jurídicas. <b>Durante:</b> relacione esa decisión con un principio, una competencia y un deber concreto. <b>Después:</b> registre una medida preventiva aplicable en su institución.</p><div class="learning-note">La cartilla sirve para reconocer situaciones que requieren orientación; no reemplaza un concepto jurídico individual.</div></section></div>
+<div class="page-footer">
+<span>Pedagogía en Derechos • Montería, Córdoba</span>
+<span class="page-number">4</span>
+</div>
+</div>
+<!-- ========================================== -->
+<!-- PÁGINA 3: EL DOCENTE COMO SERVIDOR PÚBLICO  -->
+<!-- ========================================== -->
+<div class="page" data-page="5" id="pagina-5">
+<div class="page-header">
+<span class="doc-title">Docencia Pública con Responsabilidad</span>
+<span>El Servidor Público Docente • Pág. 5</span>
+</div>
+<div class="content-body">
+<div>
+<h1 class="page-title">El Docente como Servidor Público</h1>
+<p>De conformidad con el artículo 123 de la Constitución Política, los miembros de las corporaciones públicas, los empleados y trabajadores del Estado son servidores públicos, quienes están al servicio del Estado y de la comunidad. Esta investidura somete al educador estatal al principio de legalidad estricta (art. 6 C.P.): mientras los particulares solo son responsables por infringir la Constitución y las leyes, los servidores públicos lo son, además, por <strong>omisión o extralimitación</strong> en el ejercicio de sus funciones.</p>
+</div>
+<div class="grid-2">
+<div class="card-item accent-border">
+<span class="badge-regimen badge-1278">Docentes de Aula</span>
+<p style="font-size: 9pt;">Desarrollan labores académicas directas con los educandos en los procesos de enseñanza-aprendizaje (art. 5, Dec. Ley 1278 de 2002). Tienen la responsabilidad primordial sobre el diagnóstico pedagógico, planeación curricular, evaluación académica, dirección de grupo y atención formativa a familias.</p>
+</div>
+<div class="card-item blue-border">
+<span class="badge-regimen badge-general">Directivos Docentes</span>
+<p style="font-size: 9pt;">Ejercen funciones de dirección, coordinación, planeación, administración y orientación en los establecimientos (art. 6, Dec. Ley 1278 de 2002). Rectores y directores rurales tienen la representación del plantel, liderazgo pedagógico y administración del personal; los coordinadores auxilian la gestión académica y convivencial.</p>
+</div>
+</div>
+<!-- Diagrama de articulación funcional -->
+<div style="background: #FFFFFF; border: 1px solid #DCE4E8; border-radius: 6px; padding: 10px;">
+<span style="font-size: 8.5pt; font-weight: 700; color: #163A53; text-transform: uppercase;">Diagrama: Articulación de la Función Docente Oficial</span>
+<div class="svg-container" style="margin: 6px 0;">
+<svg fill="none" height="95" viewbox="0 0 450 95" width="450" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#163A53" height="45" rx="5" width="95" x="5" y="25"></rect>
+<text fill="#FAFBFC" font-size="8.5" font-weight="700" text-anchor="middle" x="52" y="47">FUNCIÓN</text>
+<text fill="#FAFBFC" font-size="8" text-anchor="middle" x="52" y="58">DOCENTE</text>
+<line stroke="#D6A64B" stroke-width="2" x1="100" x2="118" y1="47" y2="47"></line>
+<polygon fill="#D6A64B" points="120,47 114,43 114,51"></polygon>
+<rect fill="#245C7A" height="45" rx="5" width="95" x="122" y="25"></rect>
+<text fill="#FAFBFC" font-size="8.5" font-weight="700" text-anchor="middle" x="169" y="47">PRINCIPIOS</text>
+<text fill="#FAFBFC" font-size="8" text-anchor="middle" x="169" y="58">Art. 209 C.P.</text>
+<line stroke="#D6A64B" stroke-width="2" x1="217" x2="235" y1="47" y2="47"></line>
+<polygon fill="#D6A64B" points="237,47 231,43 231,51"></polygon>
+<rect fill="#168C85" height="45" rx="5" width="95" x="239" y="25"></rect>
+<text fill="#FAFBFC" font-size="8.5" font-weight="700" text-anchor="middle" x="286" y="47">DEBERES</text>
+<text fill="#FAFBFC" font-size="8" text-anchor="middle" x="286" y="58">FUNCIONALES</text>
+<line stroke="#D6A64B" stroke-width="2" x1="334" x2="352" y1="47" y2="47"></line>
+<polygon fill="#D6A64B" points="354,47 348,43 348,51"></polygon>
+<rect fill="#B84A4A" height="45" rx="5" width="89" x="356" y="25"></rect>
+<text fill="#FAFBFC" font-size="8.5" font-weight="700" text-anchor="middle" x="400" y="47">CONTROL</text>
+<text fill="#FAFBFC" font-size="8" text-anchor="middle" x="400" y="58">DISCIPLINARIO</text>
+</svg>
+</div>
+<p style="font-size: 8.5pt; color: #435466; margin: 0; text-align: center;">El deber funcional vincula la vocación formativa con el cumplimiento riguroso de la Constitución y la ley.</p>
+</div>
+<div class="box-didactic box-concepto">
+<div class="box-label">Concepto Clave: Deber Funcional</div>
+<p>Conjunto de obligaciones y prohibiciones asignadas por el ordenamiento jurídico al servidor público para garantizar el correcto funcionamiento del servicio y la efectividad de los derechos de los administrados.</p>
+</div>
+<section class="learning-panel"><div class="learning-head"><span class="learning-mark">PARA APLICAR</span><strong>¿Cómo identificar la norma aplicable?</strong></div><p><b>1.</b> Determine el tipo de vinculación y el estatuto docente correspondiente. <b>2.</b> Identifique la función concreta asignada. <b>3.</b> Consulte la Constitución, el Código General Disciplinario y las disposiciones especiales. <b>4.</b> Verifique si existe un procedimiento institucional vigente.</p><div class="learning-note">Una función no debe presumirse únicamente por el cargo: consulte manuales, actos de asignación y normas aplicables.</div></section></div>
+<div class="page-footer">
+<span>Régimen Especial y Función Pública Docente</span>
+<span class="page-number">5</span>
+</div>
+</div>
+<!-- ========================================== -->
+<!-- PÁGINA 4: PRINCIPIOS DE LA FUNCIÓN ADM.    -->
+<!-- ========================================== -->
+<div class="page" data-page="6" id="pagina-6">
+<div class="page-header">
+<span class="doc-title">Docencia Pública con Responsabilidad</span>
+<span>Principios Constitucionales • Pág. 6</span>
+</div>
+<div class="content-body">
+<div>
+<h1 class="page-title">Principios de la Función Administrativa</h1>
+<p>El artículo 209 de la Constitución Política prescribe que <em>«la función administrativa está al servicio de los intereses generales y se desarrolla con arreglo a los principios de igualdad, moralidad, eficacia, economía, celeridad, imparcialidad y publicidad»</em>. Estos principios no son meras declaraciones retóricas; constituyen parámetros imperativos de conducta que orientan la actuación del maestro y del directivo escolar.</p>
+</div>
+<!-- Infografía de principios en lenguaje docente -->
+<div class="grid-2" style="margin-top: 4px;">
+<div class="card-item accent-border">
+<strong style="color: #163A53; font-size: 9.5pt;">1. Igualdad e Imparcialidad</strong>
+<p style="font-size: 8.8pt; margin-top: 3px;">Trato equitativo a todos los miembros de la comunidad escolar, sin privilegios ni discriminaciones fundadas en motivos ideológicos, socioeconómicos, de género, etnia o credo.</p>
+</div>
+<div class="card-item accent-border">
+<strong style="color: #163A53; font-size: 9.5pt;">2. Moralidad Pública</strong>
+<p style="font-size: 8.8pt; margin-top: 3px;">Actuación fundada en la honestidad, probidad y pulcritud en el manejo de notas, bienes institucionales y relaciones pedagógicas, anteponiendo el bien común.</p>
+</div>
+<div class="card-item gold-border">
+<strong style="color: #9C6C15; font-size: 9.5pt;">3. Eficacia y Calidad</strong>
+<p style="font-size: 8.8pt; margin-top: 3px;">Orientación de la labor docente a la consecución real de los aprendizajes y al desarrollo integral del estudiante, maximizando los recursos pedagógicos disponibles.</p>
+</div>
+<div class="card-item gold-border">
+<strong style="color: #9C6C15; font-size: 9.5pt;">4. Economía y Eficiencia</strong>
+<p style="font-size: 8.8pt; margin-top: 3px;">Uso racional de los recursos y eliminación de formalismos o exigencias innecesarias que entraben el acceso al servicio educativo o a la evaluación.</p>
+</div>
+<div class="card-item blue-border">
+<strong style="color: #245C7A; font-size: 9.5pt;">5. Celeridad Procesal</strong>
+<p style="font-size: 8.8pt; margin-top: 3px;">Diligencia y oportunidad en la entrega de reportes, solución de quejas, trámites académicos y atención respetuosa a los requerimientos de la comunidad.</p>
+</div>
+<div class="card-item blue-border">
+<strong style="color: #245C7A; font-size: 9.5pt;">6. Publicidad y Transparencia</strong>
+<p style="font-size: 8.8pt; margin-top: 3px;">Claridad y difusión de criterios de evaluación, planes de área, decisiones directivas y trámites académicos para conocimiento oportuno de alumnos y padres.</p>
+</div>
+</div>
+<div class="box-didactic box-tenga">
+<div class="box-label">Tenga en Cuenta: Fuerza Vinculante del Artículo 209</div>
+<p>Los principios constitucionales orientan y vinculan la actuación administrativa. Sin embargo, para determinar responsabilidad disciplinaria se debe identificar el deber o prohibición aplicable, la conducta atribuida, la ilicitud sustancial y la culpabilidad, con pleno respeto del debido proceso.</p>
+</div>
+<section class="learning-panel"><div class="learning-head"><span class="learning-mark">PARA APLICAR</span><strong>Siete principios, siete preguntas</strong></div><p><b>Igualdad:</b> ¿ofrezco oportunidades sin discriminación? · <b>Moralidad:</b> ¿actúo con integridad? · <b>Eficacia:</b> ¿persigo el fin educativo? · <b>Economía:</b> ¿uso responsablemente los recursos? · <b>Celeridad:</b> ¿actúo oportunamente? · <b>Imparcialidad:</b> ¿evito favoritismos? · <b>Publicidad:</b> ¿comunico lo que debe ser conocido, respetando datos reservados?</p><div class="learning-note">La publicidad administrativa no elimina la reserva legal de información personal de estudiantes y familias.</div></section></div>
+<div class="page-footer">
+<span>Constitución Política de 1991 • Artículo 209</span>
+<span class="page-number">6</span>
+</div>
+</div>
+<!-- ========================================== -->
+<!-- PÁGINA 5: LOS PRINCIPIOS EN LA VIDA ESCOLAR -->
+<!-- ========================================== -->
+<div class="page" data-page="7" id="pagina-7">
+<div class="page-header">
+<span class="doc-title">Docencia Pública con Responsabilidad</span>
+<span>Aplicación Escolar de Principios • Pág. 7</span>
+</div>
+<div class="content-body">
+<div>
+<h1 class="page-title">Los Principios en la Cotidianidad Escolar</h1>
+<p>¿Cómo se traducen los principios constitucionales en el aula, en los comités de evaluación y en la sala de profesores? La siguiente matriz ilustra la aplicación práctica y concreta de cada principio en las situaciones habituales de la institución educativa oficial.</p>
+</div>
+<table class="editorial-table">
+<thead>
+<tr>
+<th style="width: 22%;">Principio</th>
+<th style="width: 38%;">Sentido Jurídico-Institucional</th>
+<th style="width: 40%;">Ejemplo Práctico en la Escuela</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Igualdad</strong></td>
+<td>Garantizar igualdad real y no discriminación; cuando corresponda, adoptar ajustes razonables para remover barreras.</td>
+<td>Brindar los ajustes razonables (PIAR) a estudiantes con necesidades diversas sin discriminarlos ni segregarlos en el aula.</td>
+</tr>
+<tr>
+<td><strong>Imparcialidad</strong></td>
+<td>Objetividad en juicios evaluativos y disciplinarios sin favorecimientos.</td>
+<td>Evaluar a los educandos basándose estrictamente en las rúbricas y desempeños, sin beneficiar a familiares o allegados.</td>
+</tr>
+<tr>
+<td><strong>Moralidad</strong></td>
+<td>Pulcritud, probidad y transparencia en la conducta oficial y académica.</td>
+<td>Rechazar dádivas, incentivos económicos o favores a cambio de modificar calificaciones o registros en el sistema escolar.</td>
+</tr>
+<tr>
+<td><strong>Eficacia</strong></td>
+<td>Cumplimiento real de los fines formativos y planes de estudio adoptados.</td>
+<td>Desarrollar la malla curricular de forma reflexiva y asegurar que los estudiantes adquieran las competencias básicas del ciclo.</td>
+</tr>
+<tr>
+<td><strong>Economía</strong></td>
+<td>Optimización de recursos y supresión de trámites o cobros no autorizados.</td>
+<td>No exigir materiales costosos inaccesibles ni imponer cobros extralegales para guías pedagógicas institucionales.</td>
+</tr>
+<tr>
+<td><strong>Celeridad</strong></td>
+<td>Respuesta ágil, dinámica y oportuna en los procesos escolares.</td>
+<td>Cargar oportunamente las calificaciones y responder solicitudes sobre notas antes del cierre del periodo lectivo.</td>
+</tr>
+<tr>
+<td><strong>Publicidad</strong></td>
+<td>Acceso público y oportuno a la información académica e institucional.</td>
+<td>Socializar con anticipación el sistema de evaluación (SIEE), las fechas de exámenes y retroalimentar oportunamente las pruebas.</td>
+</tr>
+</tbody>
+</table>
+<div class="box-didactic box-escuela">
+<div class="box-label">En la Escuela: Criterios de Evaluación Transparentes</div>
+<p>La entrega tardía u oculta de los resultados evaluativos vulnera simultáneamente la <em>publicidad</em>, la <em>celeridad</em> y el <em>debido proceso formativo</em>, impidiendo al educando y a sus familias solicitar correcciones oportunas o afianzar sus aprendizajes.</p>
+</div>
+<section class="learning-panel"><div class="learning-head"><span class="learning-mark">PARA APLICAR</span><strong>Situación para analizar</strong></div><p>Una familia solicita conocer las calificaciones de su hija y los criterios usados para evaluarla. El docente entrega la rúbrica y explica el procedimiento de revisión, sin revelar datos académicos de otros estudiantes. <b>Preguntas:</b> ¿qué principios se aplican? ¿qué información puede entregarse y cuál debe protegerse?</p><div class="learning-note">La transparencia debe armonizarse con la intimidad y la protección de datos personales.</div></section></div>
+<div class="page-footer">
+<span>Pedagogía Práctica en la Gestión Educativa</span>
+<span class="page-number">7</span>
+</div>
+</div>
+<!-- ========================================== -->
+<!-- PÁGINA 6: DEBERES DEL DOCENTE OFICIAL       -->
+<!-- ========================================== -->
+<div class="page" data-page="8" id="pagina-8">
+<div class="page-header">
+<span class="doc-title">Docencia Pública con Responsabilidad</span>
+<span>Régimen de Deberes • Pág. 8</span>
+</div>
+<div class="content-body">
+<div>
+<h1 class="page-title">Deberes del Docente y Directivo Docente</h1>
+<p>El marco obligacional de los educadores estatales se estructura en dos niveles complementarios: los <strong>deberes generales</strong> de todo servidor público previstos en la Ley 1952 de 2019 (art. 38) y los <strong>deberes especiales de la profesión docente</strong> consagrados en los estatutos correspondientes, debiendo distinguirse con precisión el ámbito de aplicación aplicable según el régimen de vinculación.</p>
+</div>
+<div class="grid-2">
+<div>
+<h2 class="section-subtitle">Deberes Generales (Ley 1952/2019)</h2>
+<div class="card-item blue-border">
+<strong style="font-size: 8.8pt; color: #163A53;">Cumplimiento y Respeto Normativo</strong>
+<p style="font-size: 8.5pt;">Acatar la Constitución, leyes, ordenanzas y manuales; cumplir órdenes legítimas de superiores (num. 1 y 8).</p>
+</div>
+<div class="card-item blue-border">
+<strong style="font-size: 8.8pt; color: #163A53;">Diligencia y Dedicación</strong>
+<p style="font-size: 8.5pt;">Prestar el servicio con diligencia e imparcialidad, dedicando la totalidad de la jornada laboral reglamentaria (num. 3 y 12).</p>
+</div>
+<div class="card-item blue-border">
+<strong style="font-size: 8.8pt; color: #163A53;">Custodia de Bienes e Información</strong>
+<p style="font-size: 8.5pt;">Cuidar archivos, documentos y bienes públicos confiados al servicio escolar (num. 5, 6 y 22).</p>
+</div>
+</div>
+<div>
+<h2 class="section-subtitle">Deberes Especiales de la Docencia</h2>
+<div class="card-item accent-border">
+<span class="badge-regimen badge-1278">Dec. Ley 1278 de 2002 (Art. 41)</span>
+<p style="font-size: 8.4pt;">• Buscar la calidad del proceso pedagógico mediante la innovación y mejora continua.<br/>
+            • Cumplir el calendario, jornada escolar y laboral reglamentaria.<br/>
+            • Educar en principios democráticos, derechos y respeto a las instituciones.<br/>
+            • Mantener relaciones cordiales con la comunidad escolar y respetar a las autoridades educativas.</p>
+</div>
+<div class="card-item gold-border">
+<span class="badge-regimen badge-2277">Dec. 2277 de 1979 (Art. 36)</span>
+<p style="font-size: 8.4pt;">El Decreto 2277 de 1979 contiene un régimen docente propio. Verifique las disposiciones específicas sobre derechos, deberes, prohibiciones y carrera aplicables al nombramiento.</p>
+</div>
+</div>
+</div>
+<div class="box-didactic box-tenga">
+<div class="box-label">Tenga en Cuenta: Diferenciación de Regímenes</div>
+<p>Las normas sobre ascenso, evaluación y retiro del Decreto 1278 de 2002 aplican exclusivamente a docentes regidos por dicho estatuto. No obstante, los principios constitucionales y el Código General Disciplinario (Ley 1952 de 2019 / Ley 2094 de 2021) cobijan a <strong>todos los docentes oficiales sin distinción de régimen</strong>.</p>
+</div>
+<section class="learning-panel"><div class="learning-head"><span class="learning-mark">PARA APLICAR</span><strong>Mapa de deberes en la escuela</strong></div><p><b>Planeación:</b> organizar actividades y evidencias. <b>Evaluación:</b> aplicar criterios institucionales conocidos. <b>Atención:</b> tramitar solicitudes dentro de la competencia asignada. <b>Custodia:</b> proteger archivos y datos. <b>Convivencia:</b> conocer y activar las rutas previstas para situaciones que lo requieran.</p><div class="learning-note">Los deberes concretos dependen de las normas, el cargo y las funciones efectivamente asignadas.</div></section></div>
+<div class="page-footer">
+<span>Ley 1952 de 2019 • Decreto Ley 1278 de 2002</span>
+<span class="page-number">8</span>
+</div>
+</div>
+<!-- ========================================== -->
+<!-- PÁGINA 7: PROHIBICIONES Y CONFLICTOS        -->
+<!-- ========================================== -->
+<div class="page" data-page="9" id="pagina-9">
+<div class="page-header">
+<span class="doc-title">Docencia Pública con Responsabilidad</span>
+<span>Prohibiciones y Riesgos • Pág. 9</span>
+</div>
+<div class="content-body">
+<div>
+<h1 class="page-title">Prohibiciones y Gestión de Conflictos de Intereses</h1>
+<p>Las prohibiciones disciplinarias son límites estrictos fijados por el legislador para salvaguardar la moralidad y la dignidad del servicio educativo. El artículo 39 de la Ley 1952 de 2019 y el artículo 42 del Decreto Ley 1278 de 2002 tipifican conductas vedadas en el contexto escolar.</p>
+</div>
+<div class="grid-2">
+<div class="card-item" style="border-left: 3px solid #B84A4A;">
+<h3 class="block-title" style="color: #B84A4A;">Prohibiciones Docentes Expresas (Art. 42 Dec. 1278)</h3>
+<ul style="font-size: 8.6pt; margin: 0; padding-left: 14px;">
+<li>Abandonar o suspender labores docentes sin justa causa.</li>
+<li>Realizar propaganda o proselitismo político o religioso en el plantel.</li>
+<li>Aplicar cualquier forma de maltrato físico o psíquico a estudiantes.</li>
+<li>Comercializar mercancías a los alumnos en beneficio particular.</li>
+<li>Asistir al colegio en estado de embriaguez o bajo sustancias psicoactivas.</li>
+<li>Utilizar la evaluación para buscar provechos personales indebidos.</li>
+</ul>
+</div>
+<div class="card-item" style="border-left: 3px solid #D59A30;">
+<h3 class="block-title" style="color: #9C6C15;">Conflictos de Intereses (Art. 44 Ley 1952)</h3>
+<p style="font-size: 8.6pt;">Se configura cuando el interés particular y directo del servidor público colisiona con el interés general. En la escuela se manifiesta al evaluar académicamente a familiares cercanos o contratar bienes escolares con parientes.</p>
+<p style="font-size: 8.4pt; color: #163A53;"><strong>Deber ineludible:</strong> Manifestar el impedimento por escrito ante el rector o superior jerárquico inmediatamente se advierta la situación.</p>
+</div>
+</div>
+<div class="box-didactic box-escuela">
+<div class="box-label">En la Escuela: Venta de Materiales Didácticos</div>
+<p>El docente que vende fotocopias, textos o uniformes a sus propios estudiantes en beneficio propio incurre en causal expresa de prohibición (art. 42 lit. g, Dec. 1278 de 2002), comprometiendo la gratuidad e imparcialidad del servicio.</p>
+</div>
+<div class="box-didactic box-tenga">
+<div class="box-label">Tenga en Cuenta: Riesgo Jurídico vs. Falta Comprobada</div>
+<p>Una tensión de intereses o una queja ciudadana representa un <strong>riesgo administrativo</strong>. Para que constituya <strong>falta disciplinaria comprobada</strong>, el Estado debe acreditar en juicio la ilicitud sustancial de la conducta y la culpabilidad del investigado respetando el debido proceso.</p>
+</div>
+<section class="learning-panel"><div class="learning-head"><span class="learning-mark">PARA APLICAR</span><strong>¿Qué hacer ante un posible conflicto de intereses?</strong></div><p><b>Detectar:</b> identificar el interés personal y su conexión con la decisión. <b>Documentar:</b> describir los hechos relevantes. <b>Comunicar:</b> presentar oportunamente el impedimento a la autoridad competente. <b>Esperar:</b> seguir el trámite legal antes de intervenir en la decisión cuestionada.</p><div class="learning-note">No todo vínculo personal configura por sí solo un impedimento; importa la causal legal y la situación específica.</div></section></div>
+<div class="page-footer">
+<span>Prevención del Conflicto de Intereses y Régimen Prohibitivo</span>
+<span class="page-number">9</span>
+</div>
+</div>
+<!-- ========================================== -->
+<!-- PÁGINA 8: ¿QUÉ ES LA RESPONSABILIDAD DISC.? -->
+<!-- ========================================== -->
+<div class="page" data-page="10" id="pagina-10">
+<div class="page-header">
+<span class="doc-title">Docencia Pública con Responsabilidad</span>
+<span>Responsabilidad Disciplinaria • Pág. 10</span>
+</div>
+<div class="content-body">
+<div>
+<h1 class="page-title">¿Qué es la Responsabilidad Disciplinaria?</h1>
+<p>La responsabilidad disciplinaria es una especie del derecho sancionador del Estado mediante la cual se juzga la conducta oficial de los servidores públicos en relación con el cumplimiento de sus deberes funcionales. A diferencia del derecho penal, cuya finalidad es la protección de bienes jurídicos individuales y colectivos mediante penas privativas de la libertad, el derecho disciplinario vela por la <strong>ética pública, la disciplina interna y el buen servicio</strong> (art. 5 Ley 1952 de 2019).</p>
+</div>
+<!-- Diagrama de elementos de la responsabilidad -->
+<div style="background: #FFFFFF; border: 1px solid #DCE4E8; border-radius: 6px; padding: 10px;">
+<span style="font-size: 8.5pt; font-weight: 700; color: #163A53; text-transform: uppercase;">Elementos Estructurales para Configurar Responsabilidad</span>
+<div class="svg-container" style="margin: 8px 0;">
+<svg fill="none" height="85" viewbox="0 0 450 85" width="450" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#245C7A" height="55" rx="5" width="100" x="5" y="15"></rect>
+<text fill="#FAFBFC" font-size="8.5" font-weight="700" text-anchor="middle" x="55" y="38">1. TIPICIDAD</text>
+<text fill="#EDF2F5" font-size="7.5" text-anchor="middle" x="55" y="50">Conducta descrita</text>
+<text fill="#EDF2F5" font-size="7.5" text-anchor="middle" x="55" y="60">en la ley vigente</text>
+<line stroke="#D6A64B" stroke-width="2" x1="108" x2="118" y1="42" y2="42"></line>
+<rect fill="#168C85" height="55" rx="5" width="100" x="120" y="15"></rect>
+<text fill="#FAFBFC" font-size="8.5" font-weight="700" text-anchor="middle" x="170" y="38">2. ILICITUD</text>
+<text fill="#EDF2F5" font-size="7.5" text-anchor="middle" x="170" y="50">Afectación sustancial</text>
+<text fill="#EDF2F5" font-size="7.5" text-anchor="middle" x="170" y="60">al deber funcional</text>
+<line stroke="#D6A64B" stroke-width="2" x1="223" x2="233" y1="42" y2="42"></line>
+<rect fill="#163A53" height="55" rx="5" width="100" x="235" y="15"></rect>
+<text fill="#FAFBFC" font-size="8.5" font-weight="700" text-anchor="middle" x="285" y="38">3. CULPABILIDAD</text>
+<text fill="#EDF2F5" font-size="7.5" text-anchor="middle" x="285" y="50">Dolo o culpa grave</text>
+<text fill="#EDF2F5" font-size="7.5" text-anchor="middle" x="285" y="60">/ gravísima probada</text>
+<line stroke="#D6A64B" stroke-width="2" x1="338" x2="348" y1="42" y2="42"></line>
+<rect fill="#287A55" height="55" rx="5" width="95" x="350" y="15"></rect>
+<text fill="#FAFBFC" font-size="8.5" font-weight="700" text-anchor="middle" x="397" y="38">SANCIÓN</text>
+<text fill="#EDF2F5" font-size="7.5" text-anchor="middle" x="397" y="50">Solo si concurren</text>
+<text fill="#EDF2F5" font-size="7.5" text-anchor="middle" x="397" y="60">los tres elementos</text>
+</svg>
+</div>
+</div>
+<div class="grid-2">
+<div class="card-item accent-border">
+<strong style="color: #168C85; font-size: 9.5pt;">Finalidad Preventiva</strong>
+<p style="font-size: 8.8pt;">Promover la autorregulación ética y el conocimiento normativo para evitar desvíos o arbitrariedades en la gestión escolar.</p>
+</div>
+<div class="card-item gold-border">
+<strong style="color: #9C6C15; font-size: 9.5pt;">Finalidad Correctiva</strong>
+<p style="font-size: 8.8pt;">Restablecer la confianza pública y el orden institucional cuando se constata un quebrantamiento injustificado de los deberes.</p>
+</div>
+</div>
+<div class="editorial-band"><strong>Ruta de lectura jurídica, no fórmula automática de sanción.</strong> Ante una situación escolar, identifique primero los hechos verificables y el deber funcional; después examine la norma aplicable, la afectación sustancial, la culpabilidad y las posibles causas de exclusión. La decisión corresponde a la autoridad competente, con garantías procesales.</div><div class="box-didactic box-concepto">
+<div class="box-label">Concepto Clave: Principio de Proscripción de la Responsabilidad Objetiva</div>
+<p>El artículo 10 del Código General Disciplinario proscribe la responsabilidad objetiva. La autoridad debe acreditar culpabilidad en la modalidad legalmente sancionable; la existencia de una irregularidad, por sí sola, no demuestra dolo ni culpa grave o gravísima.</p>
+</div>
+<section class="learning-panel"><div class="learning-head"><span class="learning-mark">PARA APLICAR</span><strong>Lista de comprobación antes de concluir</strong></div><p>¿Existe una norma o deber funcional aplicable? ¿Se conoce con precisión la conducta? ¿La afectación al deber funcional es sustancial y carece de justificación? ¿Se acreditó dolo o culpa sancionable? ¿Se respetaron las garantías del investigado?</p><div class="learning-note">Esta secuencia es una guía didáctica: la valoración corresponde a la autoridad competente, con prueba y motivación.</div></section></div>
+<div class="page-footer">
+<span>Teoría General del Derecho Disciplinario</span>
+<span class="page-number">10</span>
+</div>
+</div>
+<!-- ========================================== -->
+<!-- PÁGINA 9: ACCIÓN, OMISIÓN Y EXTRALIMITACIÓN -->
+<!-- ========================================== -->
+<div class="page" data-page="11" id="pagina-11">
+<div class="page-header">
+<span class="doc-title">Docencia Pública con Responsabilidad</span>
+<span>Formas de Realización • Pág. 11</span>
+</div>
+<div class="content-body">
+<div>
+<h1 class="page-title">Acción, Omisión y Extralimitación</h1>
+<p>El artículo 27 de la Ley 1952 de 2019 establece que la falta disciplinaria puede ser cometida por <strong>acción</strong>, por <strong>omisión</strong> o por <strong>extralimitación de funciones</strong>. En el ámbito escolar, comprender estas modalidades permite discernir entre la correcta iniciativa pedagógica y la conducta jurídicamente reprochable.</p>
+</div>
+<div class="grid-3">
+<div class="card-item blue-border">
+<div style="font-weight: 700; color: #163A53; font-size: 9.5pt; margin-bottom: 3px;">1. ACCIÓN</div>
+<p style="font-size: 8.6pt;">Hacer lo que la norma prohíbe expresamente.</p>
+<div style="background: #EDF2F5; padding: 6px; border-radius: 4px; margin-top: 6px; font-size: 8.2pt;">
+<strong>Ejemplo escolar:</strong> El docente agrede verbal o físicamente a un estudiante o realiza proselitismo político dentro del salón de clases.
+          </div>
+</div>
+<div class="card-item accent-border">
+<div style="font-weight: 700; color: #168C85; font-size: 9.5pt; margin-bottom: 3px;">2. OMISIÓN</div>
+<p style="font-size: 8.6pt;">Dejar de hacer lo que el deber funcional ordena.</p>
+<div style="background: #EBF5F4; padding: 6px; border-radius: 4px; margin-top: 6px; font-size: 8.2pt;">
+<strong>Ejemplo escolar:</strong> Presenciar una situación flagrante de acoso escolar (bullying) o agresión y no activar la Ruta de Atención Integral (Ley 1620 de 2013).
+          </div>
+</div>
+<div class="card-item gold-border">
+<div style="font-weight: 700; color: #9C6C15; font-size: 9.5pt; margin-bottom: 3px;">3. EXTRALIMITACIÓN</div>
+<p style="font-size: 8.6pt;">Ejercer atribuciones que corresponden a otra autoridad.</p>
+<div style="background: #FDF8ED; padding: 6px; border-radius: 4px; margin-top: 6px; font-size: 8.2pt;">
+<strong>Ejemplo escolar:</strong> Un docente de aula decreta la expulsión definitiva de un estudiante, usurpando las facultades exclusivas del Consejo Directivo.
+          </div>
+</div>
+</div>
+<div class="box-didactic box-tenga">
+<div class="box-label">Tenga en Cuenta: La Posición de Garante en la Escuela</div>
+<p>El inciso segundo del artículo 27 de la Ley 1952 de 2019 advierte: <em>«Cuando se tiene el deber jurídico de impedir un resultado, no evitarlo, pudiendo hacerlo equivale a producirlo»</em>. El docente tiene una posición de garante frente a la seguridad física y psicológica de los menores a su cargo durante la jornada escolar.</p>
+</div>
+<div class="box-didactic box-reflexion">
+<div class="box-label">Para Reflexionar</div>
+<p>¿Conoce usted detalladamente las rutas y protocolos institucionales de su colegio para actuar diligentemente y evitar incurrir en faltas disciplinarias por omisión?</p>
+</div>
+<section class="learning-panel"><div class="learning-head"><span class="learning-mark">PARA APLICAR</span><strong>Compare las tres modalidades</strong></div><p><b>Acción:</b> realizar una conducta jurídicamente relevante. <b>Omisión:</b> no cumplir un deber de actuar que correspondía al servidor. <b>Extralimitación:</b> actuar más allá de la competencia conferida. En todos los casos debe identificarse la función, el contexto y la norma aplicable.</p><div class="learning-note">Una omisión requiere establecer qué conducta era exigible y si existía posibilidad real de cumplirla.</div></section></div>
+<div class="page-footer">
+<span>Modalidades de la Conducta Disciplinable • Art. 27 Ley 1952</span>
+<span class="page-number">11</span>
+</div>
+</div>
+<!-- ========================================== -->
+<!-- PÁGINA 10: ILICITUD SUSTANCIAL Y CULPABILIDAD-->
+<!-- ========================================== -->
+<div class="page" data-page="12" id="pagina-12">
+<div class="page-header">
+<span class="doc-title">Docencia Pública con Responsabilidad</span>
+<span>Ilicitud Sustancial y Culpabilidad • Pág. 12</span>
+</div>
+<div class="content-body">
+<div>
+<h1 class="page-title">Ilicitud Sustancial y Culpabilidad</h1>
+<p>Uno de los mayores avances del derecho disciplinario contemporáneo radica en la consolidación del principio de <strong>ilicitud sustancial</strong>, modificado expresamente por el artículo 2 de la Ley 2094 de 2021: <em>«La conducta del disciplinable será ilícita cuando afecte sustancialmente el deber funcional sin justificación alguna»</em>. Esto significa que la simple infracción formal a un reglamento no configura falta si no lesiona materialmente la función pública docente.</p>
+</div>
+<div class="grid-2">
+<div class="card-item blue-border">
+<h3 class="block-title" style="color: #163A53;">Culpabilidad: Dolo vs. Culpa</h3>
+<p style="font-size: 8.8pt;"><strong>Dolo (art. 28):</strong> El servidor conoce los hechos constitutivos de la falta, sabe de su ilicitud y voluntariamente decide ejecutarla.</p>
+<p style="font-size: 8.8pt;"><strong>Culpa (art. 29 Ley 2094/2021):</strong> Infracción al deber objetivo de cuidado exigible. Solo son sancionables la <em>culpa gravísima</em> (ignorancia supina, desatención elemental) y la <em>culpa grave</em> (inobservancia del cuidado ordinario). <strong>¡La culpa leve no es sancionable en materia disciplinaria!</strong></p>
+</div>
+<div class="card-item accent-border">
+<h3 class="block-title" style="color: #168C85;">Presupuestos de Exclusión (Art. 31)</h3>
+<p style="font-size: 8.5pt;">No habrá lugar a responsabilidad disciplinaria cuando se actúe bajo causales de exclusión justificadas:</p>
+<ul style="font-size: 8.3pt; margin: 0; padding-left: 14px;">
+<li>Fuerza mayor o caso fortuito.</li>
+<li>Cumplimiento estricto de un deber constitucional superior.</li>
+<li>Salvar un derecho propio o ajeno (estado de necesidad).</li>
+<li>Insuperable coacción ajena o miedo insuperable.</li>
+<li>Error invencible de hecho o de derecho.</li>
+</ul>
+</div>
+</div>
+<!-- Esquema de análisis preventivo -->
+<div style="background: #FFFFFF; border: 1px solid #DCE4E8; border-radius: 6px; padding: 10px;">
+<span style="font-size: 8.5pt; font-weight: 700; color: #163A53; text-transform: uppercase;">Esquema Preventivo: ¿Cuándo hay relevancia disciplinaria?</span>
+<div class="grid-3" style="margin-top: 6px;">
+<div style="text-align: center; background: #EDF2F5; padding: 7px; border-radius: 4px;">
+<div style="font-size: 8pt; font-weight: 700; color: #163A53;">1. Error Formal</div>
+<p style="font-size: 7.8pt; margin: 2px 0 0 0;">Falla administrativa subsanable sin daño al servicio: <em>Archivo / Medida pedagógica</em></p>
+</div>
+<div style="text-align: center; background: #FDF8ED; padding: 7px; border-radius: 4px;">
+<div style="font-size: 8pt; font-weight: 700; color: #9C6C15;">2. Culpa Leve</div>
+<p style="font-size: 7.8pt; margin: 2px 0 0 0;">Descuido menor no intencional: <em>Atípico en disciplina (art. 29 Ley 2094)</em></p>
+</div>
+<div style="text-align: center; background: #FCEBEB; padding: 7px; border-radius: 4px;">
+<div style="font-size: 8pt; font-weight: 700; color: #B84A4A;">3. Falta Disciplinaria</div>
+<p style="font-size: 7.8pt; margin: 2px 0 0 0;">Afectación sustancial + Dolo o Culpa Grave/Gravísima: <em>Proceso formal</em></p>
+</div>
+</div>
+</div>
+<div class="box-didactic box-concepto">
+<div class="box-label">Concepto Clave: Preservación del Orden Interno</div>
+<p>El artículo 68 de la Ley 1952 de 2019 faculta al rector o jefe inmediato para adoptar medidas correctivas internas frente a hechos que contraríen en menor grado el orden institucional sin acudir a procesos disciplinarios. Dichas medidas no generan antecedente alguno.</p>
+</div>
+<section class="learning-panel"><div class="learning-head"><span class="learning-mark">PARA APLICAR</span><strong>Dos situaciones que no deben confundirse</strong></div><p><b>Error formal:</b> una inconsistencia documental que debe corregirse no implica automáticamente afectación sustancial del deber funcional. <b>Conducta relevante:</b> la alteración intencional de un registro académico exige analizar normas, pruebas, circunstancias y culpabilidad.</p><div class="learning-note">No hay sanción automática: el análisis jurídico es individual y debe respetar el debido proceso.</div></section></div>
+<div class="page-footer">
+<span>Dogmática Disciplinaria • Ley 1952 de 2019 reformada por Ley 2094 de 2021</span>
+<span class="page-number">12</span>
+</div>
+</div>
+<!-- ========================================== -->
+<!-- PÁGINA 11: FALTAS Y SANCIONES               -->
+<!-- ========================================== -->
+<div class="page" data-page="13" id="pagina-13">
+<div class="page-header">
+<span class="doc-title">Docencia Pública con Responsabilidad</span>
+<span>Clasificación de Faltas y Sanciones • Pág. 13</span>
+</div>
+<div class="content-body">
+<div>
+<h1 class="page-title">Faltas y Sanciones Disciplinarias</h1>
+<p>El régimen disciplinario clasifica las faltas en <strong>gravísimas, graves y leves</strong> (art. 46 Ley 1952). Las faltas gravísimas se encuentran taxativamente señaladas en el código (arts. 52 a 65); la gravedad o levedad de las demás se determina según los criterios del artículo 47 modificado por la Ley 2094 de 2021 (naturaleza del servicio, culpabilidad, perturbación y trascendencia social).</p>
+</div>
+<table class="editorial-table">
+<thead>
+<tr>
+<th style="width: 28%;">Clasificación de la Falta</th>
+<th style="width: 22%;">Modalidad Subjetiva</th>
+<th style="width: 50%;">Sanción Legal Aplicable (Art. 48 Ley 2094 de 2021)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td rowspan="2"><strong>Falta Gravísima</strong><br/><small style="color: #6B7C8C;">Taxativamente listadas en la ley</small></td>
+<td>Dolosa</td>
+<td><strong>Destitución e Inhabilidad General</strong> de diez (10) a veinte (20) años. Exclusión de carrera docente.</td>
+</tr>
+<tr>
+<td>Culpa Gravísima</td>
+<td><strong>Destitución e Inhabilidad General</strong> de ocho (8) a diez (10) años.</td>
+</tr>
+<tr>
+<td rowspan="2"><strong>Falta Grave</strong><br/><small style="color: #6B7C8C;">Determinada por criterios del Art. 47</small></td>
+<td>Dolosa</td>
+<td><strong>Suspensión en el cargo</strong> de tres (3) a dieciocho (18) meses e inhabilidad especial.</td>
+</tr>
+<tr>
+<td>Culpa Grave</td>
+<td><strong>Suspensión en el cargo</strong> de uno (1) a doce (12) meses.</td>
+</tr>
+<tr>
+<td rowspan="2"><strong>Falta Leve</strong><br/><small style="color: #6B7C8C;">Menor grado de afectación funcional</small></td>
+<td>Dolosa</td>
+<td><strong>Multa</strong> de diez (10) a ciento ochenta (180) días de salario básico devengado.</td>
+</tr>
+<tr>
+<td>Culpa Grave</td>
+<td><strong>Amonestación escrita</strong> con anotación en la hoja de vida.</td>
+</tr>
+</tbody>
+</table>
+<div class="box-didactic box-tenga">
+<div class="box-label">Tenga en Cuenta: Graduación de la Sanción</div>
+<p>De conformidad con el artículo 50 de la Ley 1952 (modificado por Ley 2094), el juzgador debe valorar atenuantes (diligencia demostrada, resarcimiento espontáneo, confesión) y agravantes (daño social, reiteración, jerarquía directiva) para fijar el monto exacto de la sanción. No existen correspondencias automáticas sin estudio del caso.</p>
+</div>
+<div class="box-didactic box-concepto">
+<div class="box-label">Concepto Clave: Efectos de la Destitución en Docentes</div>
+<p>La destitución implica la terminación forzosa del vínculo legal y la <strong>exclusión del Escalafón Docente</strong> (art. 49 Ley 2094 y art. 64 Dec. 1278). Solo podrá reingresarse por concurso superado el lapso de inhabilidad legal (art. 25 Dec. 1278).</p>
+</div>
+<section class="learning-panel"><div class="learning-head"><span class="learning-mark">PARA APLICAR</span><strong>Cómo leer la tabla de sanciones</strong></div><p>La clasificación de una falta y la modalidad de culpabilidad son aspectos diferentes. Antes de relacionar una conducta con una consecuencia, deben examinarse la norma vigente, las circunstancias acreditadas y las reglas de graduación. <b>Evite</b> usar la tabla como calculadora automática de sanciones.</p><div class="learning-note">Las sanciones indicadas deben contrastarse con el texto legal vigente antes de utilizar la cartilla en capacitación.</div></section></div>
+<div class="page-footer">
+<span>Catálogo Sancionatorio Vigente • Artículo 48 Ley 2094 de 2021</span>
+<span class="page-number">13</span>
+</div>
+</div>
+<!-- ========================================== -->
+<!-- PÁGINA 12: GARANTÍAS DEL SERVIDOR PÚBLICO   -->
+<!-- ========================================== -->
+<div class="page" data-page="14" id="pagina-14">
+<div class="page-header">
+<span class="doc-title">Docencia Pública con Responsabilidad</span>
+<span>Garantías Procesales • Pág. 14</span>
+</div>
+<div class="content-body">
+<div>
+<h1 class="page-title">Garantías Procesales del Docente Investigado</h1>
+<p>El control disciplinario no es un poder arbitrario ni sumario de la administración. El artículo 29 de la Constitución Política y los artículos 1 a 22 de la Ley 1952 de 2019 estructuran un sistema estricto de garantías fundamentales que protegen al servidor público frente a la actividad estatal de investigación y juzgamiento.</p>
+</div>
+<!-- Infografía de garantías procesales -->
+<div style="background: #FFFFFF; border: 1px solid #DCE4E8; border-radius: 6px; padding: 10px;">
+<span style="font-size: 8.5pt; font-weight: 700; color: #163A53; text-transform: uppercase;">Infografía: Mis Derechos frente a una Actuación Disciplinaria</span>
+<div class="grid-3" style="margin-top: 8px;">
+<div class="card-item accent-border">
+<strong style="font-size: 8.5pt; color: #168C85;">Separación de Roles</strong>
+<p style="font-size: 8pt; margin-top: 2px;">El funcionario que instruye o investiga no puede ser el mismo que juzgue y falle (art. 12 Ley 2094/2021).</p>
+</div>
+<div class="card-item accent-border">
+<strong style="font-size: 8.5pt; color: #168C85;">Presunción de Inocencia</strong>
+<p style="font-size: 8pt; margin-top: 2px;">El docente es inocente hasta fallo en firme. Toda duda razonable se resuelve a su favor (art. 14).</p>
+</div>
+<div class="card-item accent-border">
+<strong style="font-size: 8.5pt; color: #168C85;">Derecho de Defensa</strong>
+<p style="font-size: 8pt; margin-top: 2px;">Derecho a apoderado técnico o defensor de oficio gratuito de Defensoría Pública (arts. 15 y 70 Ley 2094).</p>
+</div>
+<div class="card-item gold-border">
+<strong style="font-size: 8.5pt; color: #9C6C15;">Contradicción y Prueba</strong>
+<p style="font-size: 8pt; margin-top: 2px;">Solicitar pruebas, objetar dictámenes y controvertir los testimonios del quejoso (arts. 110 y 112).</p>
+</div>
+<div class="card-item gold-border">
+<strong style="font-size: 8.5pt; color: #9C6C15;">Doble Instancia</strong>
+<p style="font-size: 8pt; margin-top: 2px;">Apelar el fallo sancionatorio ante una autoridad superior e independiente para su revisión (art. 12).</p>
+</div>
+<div class="card-item gold-border">
+<strong style="font-size: 8.5pt; color: #9C6C15;">Cláusula de Exclusión</strong>
+<p style="font-size: 8pt; margin-top: 2px;">Toda prueba obtenida con vulneración de derechos fundamentales es nula de pleno derecho (art. 21).</p>
+</div>
+</div>
+</div>
+<div class="chapter-kicker">Mapa orientativo del procedimiento</div><div class="visual-steps"><div class="visual-step"><b>01 · Conocimiento</b>Noticia de los hechos y examen de competencia.</div><div class="visual-step"><b>02 · Investigación</b>Recolección y contradicción de pruebas según la etapa.</div><div class="visual-step"><b>03 · Juzgamiento</b>Valoración de cargos, descargos y garantías.</div><div class="visual-step"><b>04 · Decisión</b>Fallo motivado y recursos que correspondan.</div></div><div style="font-size:8.6pt;color:#516575">Esquema pedagógico simplificado: las etapas y autoridades concretas dependen del procedimiento y de la normativa vigente.</div><div class="box-didactic box-escuela">
+<div class="box-label">En la Escuela: Citación a Descargos</div>
+<p>Ningún rector, coordinador o supervisor puede imponer sanciones verbales o escritas en la hoja de vida sin un proceso previo adelantado por la <strong>Oficina de Control Disciplinario Interno</strong> o la <strong>Procuraduría General</strong>, garantizando la formulación formal de cargos y el término legal probatorio.</p>
+</div>
+<div class="box-didactic box-reflexion">
+<div class="box-label">Para Reflexionar</div>
+<p>¿Sabe usted ante cuál dependencia territorial de control disciplinario debe tramitarse cualquier denuncia y cómo hacer valer su derecho de defensa material desde la indagación previa?</p>
+</div>
+<section class="learning-panel"><div class="learning-head"><span class="learning-mark">PARA APLICAR</span><strong>Si recibe una comunicación disciplinaria</strong></div><p><b>Lea</b> la actuación y sus términos. <b>Conserve</b> documentos y comunicaciones. <b>Identifique</b> la autoridad y el estado del trámite. <b>Solicite</b> orientación jurídica cuando sea necesario. <b>Ejerza</b> defensa y contradicción por los medios y oportunidades previstos.</p><div class="learning-note">La apertura de una investigación no equivale a una declaración de responsabilidad.</div></section></div>
+<div class="page-footer">
+<span>Garantías Sustanciales y Procesales del Servidor Docente</span>
+<span class="page-number">14</span>
+</div>
+</div>
+<!-- ========================================== -->
+<!-- PÁGINA 13: CASOS PRÁCTICOS I                -->
+<!-- ========================================== -->
+<div class="page" data-page="15" id="pagina-15">
+<div class="page-header">
+<span class="doc-title">Docencia Pública con Responsabilidad</span>
+<span>Estudio de Casos I • Pág. 15</span>
+</div>
+<div class="content-body">
+<div>
+<h1 class="page-title">Casos Prácticos en Contexto Escolar (I)</h1>
+<p>El análisis casuístico permite afianzar el aprendizaje sin anticipar conclusiones sancionatorias infundadas. A continuación se presentan tres situaciones hipotéticas cotidianas para su estudio metodológico.</p>
+</div><div class="school-ribbon"><span><strong>Guía de análisis:</strong> ¿Qué hechos están probados? ¿Qué deber concreto era exigible? ¿Hubo justificación? ¿Qué autoridad es competente? ¿Qué garantías deben respetarse?</span></div>
+<!-- Caso 1 -->
+<div class="card-item accent-border">
+<strong style="color: #163A53; font-size: 9.3pt;">Caso Hipotético 1: Ausencia en Jornada Pedagógica por Dificultad de Transporte</strong>
+<p style="font-size: 8.4pt; margin: 2px 0;"><strong>Situación:</strong> Una docente de zona rural no asiste a una jornada de capacitación institucional convocada en la cabecera municipal debido al desbordamiento súbito de un arroyo en época de invierno.</p>
+<p style="font-size: 8.4pt; margin: 2px 0;"><strong>Pregunta orientadora:</strong> ¿Incurre en falta disciplinaria por abandono de labores o incumplimiento de jornada?</p>
+<p style="font-size: 8.4pt; margin: 2px 0;"><strong>Análisis jurídico:</strong> Debe evaluarse si concurre una causal de exclusión de responsabilidad por <em>fuerza mayor</em> (art. 31 num. 1 Ley 1952 de 2019). La eventual fuerza mayor exige comprobar que el hecho fue imprevisible o irresistible y que impidió realmente asistir. Deben verificarse las comunicaciones y las alternativas disponibles.</p>
+<p style="font-size: 8.4pt; margin: 2px 0; color: #168C85;"><strong>Orientación preventiva:</strong> Radicar de inmediato informe escrito ante la rectoría con soportes y registros comunitarios que constaten la contingencia climática.</p>
+</div>
+<!-- Caso 2 -->
+<div class="card-item gold-border">
+<strong style="color: #9C6C15; font-size: 9.3pt;">Caso Hipotético 2: Retención de Informes de Calificaciones por Inconformidad</strong>
+<p style="font-size: 8.4pt; margin: 2px 0;"><strong>Situación:</strong> Un educador retiene las planillas finales de evaluación y no las sube al sistema institucional porque la rectoría no le suministró los insumos de papelería solicitados para sus clases.</p>
+<p style="font-size: 8.4pt; margin: 2px 0;"><strong>Pregunta orientadora:</strong> ¿Constituye una vía de hecho con relevancia disciplinaria?</p>
+<p style="font-size: 8.4pt; margin: 2px 0;"><strong>Análisis jurídico:</strong> Afecta sustancialmente el principio de <em>celeridad, eficacia y publicidad</em> (art. 209 C.P.) e infringe el deber funcional de custodia y registro oportuno. El desacuerdo administrativo no autoriza la parálisis de la evaluación escolar.</p>
+<p style="font-size: 8.4pt; margin: 2px 0; color: #9C6C15;"><strong>Orientación preventiva:</strong> Canalizar los reclamos administrativos mediante derechos de petición o recursos legales sin suspender deberes académicos esenciales.</p>
+</div>
+<!-- Caso 3 -->
+<div class="card-item blue-border">
+<strong style="color: #245C7A; font-size: 9.3pt;">Caso Hipotético 3: Comentarios Desobligantes a Estudiantes en Redes Sociales</strong>
+<p style="font-size: 8.4pt; margin: 2px 0;"><strong>Situación:</strong> En un grupo de WhatsApp creado para fines escolares, un docente emite comentarios sarcásticos e hirientes sobre las capacidades intelectuales de un grupo de estudiantes de grado noveno.</p>
+<p style="font-size: 8.4pt; margin: 2px 0;"><strong>Pregunta orientadora:</strong> ¿Se vulnera el régimen disciplinario aun fuera del aula física?</p>
+<p style="font-size: 8.4pt; margin: 2px 0;"><strong>Análisis jurídico:</strong> El caso exige examinar el deber de trato digno, el contenido y contexto de los mensajes, la relación con la función docente y las reglas del régimen aplicable. Los canales digitales escolares también pueden ser relevantes.</p>
+<p style="font-size: 8.4pt; margin: 2px 0; color: #245C7A;"><strong>Orientación preventiva:</strong> Establecer protocolos netiqueta y ceñirse al respeto absoluto y la orientación formativa en entornos virtuales.</p>
+</div>
+</div>
+<div class="page-footer">
+<span>Casuística Preventiva en el Entorno Escolar</span>
+<span class="page-number">15</span>
+</div>
+</div>
+<!-- ========================================== -->
+<!-- PÁGINA 14: CASOS PRÁCTICOS II               -->
+<!-- ========================================== -->
+<div class="page" data-page="16" id="pagina-16">
+<div class="page-header">
+<span class="doc-title">Docencia Pública con Responsabilidad</span>
+<span>Estudio de Casos II • Pág. 16</span>
+</div>
+<div class="content-body">
+<div>
+<h1 class="page-title">Casos Prácticos en Contexto Escolar (II)</h1>
+<p>A continuación se analizan tres escenarios hipotéticos de mayor complejidad jurídica, involucrando conflictos de intereses, omisión frente a riesgos estudiantiles y respeto a las garantías procesales.</p>
+</div><div class="school-ribbon"><span><strong>Guía de análisis:</strong> ¿Qué hechos están probados? ¿Qué deber concreto era exigible? ¿Hubo justificación? ¿Qué autoridad es competente? ¿Qué garantías deben respetarse?</span></div>
+<!-- Caso 4 -->
+<div class="card-item accent-border">
+<strong style="color: #163A53; font-size: 9.3pt;">Caso Hipotético 4: Nombramiento de Familiar en Adquisición de Tienda Escolar</strong>
+<p style="font-size: 8.4pt; margin: 2px 0;"><strong>Situación:</strong> Un directivo docente interviene en el comité directivo y adjudica el contrato de arrendamiento del espacio de la tienda escolar a la empresa de su cónyuge, omitiendo declararse impedido.</p>
+<p style="font-size: 8.4pt; margin: 2px 0;"><strong>Pregunta orientadora:</strong> ¿Qué repercusión jurídica se configura?</p>
+<p style="font-size: 8.4pt; margin: 2px 0;"><strong>Análisis jurídico:</strong> Los hechos plantean un posible conflicto de intereses y exigen revisar las competencias del directivo, el vínculo familiar, las reglas de impedimentos y el procedimiento de contratación. La calificación de la conducta corresponde a la autoridad competente.</p>
+<p style="font-size: 8.4pt; margin: 2px 0; color: #168C85;"><strong>Orientación preventiva:</strong> Manifestar formalmente el impedimento y abstenerse de deliberar o suscribir acuerdos donde existan intereses de parientes hasta cuarto grado de consanguinidad o segundo de afinidad.</p>
+</div>
+<!-- Caso 5 -->
+<div class="card-item gold-border">
+<strong style="color: #9C6C15; font-size: 9.3pt;">Caso Hipotético 5: Omisión ante Caso Grave de Acoso Escolar Reiterado</strong>
+<p style="font-size: 8.4pt; margin: 2px 0;"><strong>Situación:</strong> Un docente recibe quejas reiteradas y por escrito sobre hostigamiento sistemático y agresiones contra una alumna, limitándose a decir a los padres que «resuelvan sus diferencias como amigos» sin remitir el caso a coordinación ni activar la ruta legal.</p>
+<p style="font-size: 8.4pt; margin: 2px 0;"><strong>Pregunta orientadora:</strong> ¿Existe responsabilidad por omisión en el deber de cuidado?</p>
+<p style="font-size: 8.4pt; margin: 2px 0;"><strong>Análisis jurídico:</strong> Debe establecerse qué información recibió el docente, qué obligaciones de reporte y protección le correspondían y si existían medios para activar oportunamente la ruta institucional. La omisión no puede calificarse sin analizar esos elementos.</p>
+<p style="font-size: 8.4pt; margin: 2px 0; color: #9C6C15;"><strong>Orientación preventiva:</strong> Documentar de inmediato y remitir según el protocolo institucional (Ruta de Atención Tipo II o III) a orientación escolar y directivos.</p>
+</div>
+<!-- Caso 6 -->
+<div class="card-item blue-border">
+<strong style="color: #245C7A; font-size: 9.3pt;">Caso Hipotético 6: Suspensión de Sueldo sin Proceso Disciplinario Previo</strong>
+<p style="font-size: 8.4pt; margin: 2px 0;"><strong>Situación:</strong> Tras una fuerte discusión verbal entre un docente y un directivo, este último emite una circular ordenando la retención del salario del maestro por «desacato a la autoridad institucional».</p>
+<p style="font-size: 8.4pt; margin: 2px 0;"><strong>Pregunta orientadora:</strong> ¿Es legal esta decisión administrativa sumaria?</p>
+<p style="font-size: 8.4pt; margin: 2px 0;"><strong>Análisis jurídico:</strong> Una retención salarial utilizada como castigo informal plantea problemas de competencia y debido proceso. Es necesario distinguirla de descuentos autorizados por una norma y verificar quién puede adoptar cada decisión.</p>
+<p style="font-size: 8.4pt; margin: 2px 0; color: #245C7A;"><strong>Orientación preventiva:</strong> Acudir al conducto regular y recordar que la potestad sancionatoria corresponde exclusivamente a las autoridades de control disciplinario designadas por ley.</p>
+</div>
+</div>
+<div class="page-footer">
+<span>Garantías Institucionales y Gestión Preventiva de Riesgos</span>
+<span class="page-number">16</span>
+</div>
+</div>
+<!-- ========================================== -->
+<!-- PÁGINA 15: DECÁLOGO Y AUTOEVALUACIÓN        -->
+<!-- ========================================== -->
+<div class="page" data-page="17" id="pagina-17">
+<div class="page-header">
+<span class="doc-title">Docencia Pública con Responsabilidad</span>
+<span>Decálogo y Autoevaluación • Pág. 17</span>
+</div>
+<div class="content-body">
+<div>
+<h1 class="page-title">Decálogo Preventivo y Autoevaluación</h1>
+<p>Una síntesis orientadora para afianzar el ejercicio docente cotidiano con tranquilidad y rigor jurídico.</p>
+</div>
+<div class="grid-2">
+<div style="background: #FFFFFF; border: 1px solid #DCE4E8; border-radius: 6px; padding: 10px;">
+<h2 class="section-subtitle" style="font-size: 10.5pt; color: #163A53; margin-bottom: 6px;">Decálogo del Docente Oficial</h2>
+<ol style="font-size: 8.1pt; margin: 0; padding-left: 14px; line-height: 1.25;">
+<li><strong>Principio de legalidad:</strong> Actúe conociendo sus competencias y manual de funciones.</li>
+<li><strong>Imparcialidad evaluativa:</strong> Califique exclusivamente con base en evidencias y criterios objetivos.</li>
+<li><strong>Diligencia temporal:</strong> Respete la jornada laboral y cumpla oportunamente con calendarios.</li>
+<li><strong>Trato digno:</strong> Proscriba cualquier forma de maltrato físico o descalificación verbal.</li>
+<li><strong>Posición de garante:</strong> Active inmediatamente las rutas de protección infantil (Ley 1620).</li>
+<li><strong>Transparencia:</strong> No comercialice bienes ni cobre sumas de dinero no reglamentadas.</li>
+<li><strong>Neutralidad escolar:</strong> Mantenga las controversias políticas ajenas al salón de clases.</li>
+<li><strong>Gestión de impedimentos:</strong> Manifieste a tiempo cualquier conflicto de intereses familiares.</li>
+<li><strong>Documentación clara:</strong> Consigne por escrito acuerdos pedagógicos y actas de convivencia.</li>
+<li><strong>Reclamación reglada:</strong> Exija sus derechos laborales mediante los conductos institucionales.</li>
+</ol>
+</div>
+<div style="background: #F7FAFC; border: 1px solid #DCE4E8; border-radius: 6px; padding: 10px;">
+<h2 class="section-subtitle" style="font-size: 10.5pt; color: #168C85; margin-bottom: 6px;">Autoevaluación de Pedagogía Jurídica</h2>
+<div style="font-size: 7.9pt; line-height: 1.2;">
+<p><strong>1. ¿Todo retraso involuntario es falta disciplinaria?</strong><br/>
+<em>R:</em> No. La culpa leve no es sancionable y el hecho fortuito excluye responsabilidad.</p>
+<p><strong>2. ¿Puede el rector imponer multas en dinero a un maestro?</strong><br/>
+<em>R:</em> No. Solo las autoridades disciplinarias competentes tras debido proceso legal.</p>
+<p><strong>3. ¿El Decreto 1278 aplica a los docentes del Decreto 2277?</strong><br/>
+<em>R:</em> No en materia de carrera y escalafón; los cobija por igual la Ley 1952 de 2019.</p>
+<p><strong>4. ¿Qué es ilicitud sustancial?</strong><br/>
+<em>R:</em> La afectación real y sustancial al deber funcional sin justificación (Ley 2094).</p>
+<p><strong>5. ¿Tiene derecho el investigado a defensa pública gratuita?</strong><br/>
+<em>R:</em> Sí, a través de la Defensoría del Pueblo o consultorios jurídicos (art. 70 Ley 2094).</p>
+</div>
+</div>
+</div>
+<div class="box-didactic box-escuela" style="margin-top: 4px;">
+<div class="box-label">Compromiso Docente con la Ética Pública</div>
+<p>El conocimiento del marco disciplinario no busca generar temor, sino afianzar la autonomía profesional y fortalecer la confianza de la sociedad colombiana en la educación oficial.</p>
+</div>
+</div>
+<div class="page-footer">
+<span>Síntesis Preventiva y Autorregulación Ética</span>
+<span class="page-number">17</span>
+</div>
+</div>
+<!-- ========================================== -->
+<!-- PÁGINA 16: REFERENCIAS Y CONTRAPORTADA      -->
+<!-- ========================================== -->
+<div class="page" data-page="18" id="referencias"><div class="page-header"><span class="doc-title">Docencia pública con responsabilidad</span><span>Fuentes y referencias</span></div><div class="content-body"><div class="editorial-kicker">Fuentes consultadas</div><h1 class="editorial-title">Referencias normativas</h1><p class="editorial-lead">Normas de referencia para la lectura y discusión de los contenidos. Consulte siempre las versiones vigentes y sus modificaciones.</p><div class="ref-list"></div><div class="box-didactic box-tenga"><div class="box-label">Precisión jurídica</div><p>Las normas generales disciplinarias deben leerse conjuntamente con el régimen especial de vinculación docente que corresponda a cada persona y con las reglas aplicables al caso concreto.</p></div><section class="learning-panel"><div class="learning-head"><span class="learning-mark">PARA APLICAR</span><strong>Lectura normativa responsable</strong></div><p>Esta publicación es una síntesis pedagógica. Para resolver un caso real consulte la versión vigente y consolidada de las normas en fuentes oficiales, identifique el régimen de vinculación del docente y revise las reglas institucionales pertinentes. Las referencias no sustituyen el examen de los hechos y las pruebas.</p><div class="learning-note">Fecha editorial: octubre de 2026. Verificar actualizaciones normativas antes de nuevas ediciones.</div></section></div><div class="page-footer"><span>Normatividad colombiana</span><span class="page-number">18</span></div></div><div class="page page-backcover" data-page="19" id="contraportada"><div><div class="editorial-kicker" style="color:#efaa23">Pedagogía en Derechos · 2026</div><h1 style="color:white;font-size:28pt;line-height:1.18;margin-top:22px">Conocer los deberes.<br/>Comprender las garantías.<br/>Fortalecer la escuela.</h1><p style="color:#e1edf3;font-size:12pt;line-height:1.6;margin-top:25px">Una guía de consulta para promover decisiones informadas, prácticas institucionales responsables y respeto por el debido proceso en el servicio educativo oficial.</p></div><div><div style="height:3px;background:#efaa23;width:75px;margin-bottom:22px"></div><p style="color:#fff;font-weight:700;font-size:12pt">Jaime Luis Hernández Burgos</p><p style="color:#e1edf3;font-size:10pt">Estudiante de Derecho · Consultorio Jurídico Público<br/>Universidad Nacional Abierta y a Distancia — UNAD<br/>Montería, Colombia · 2026</p><p style="color:#b7cad6;font-size:8pt;margin-top:30px">Material educativo de elaboración estudiantil. No constituye una publicación institucional oficialmente avalada.</p></div></div></body>
+</html>
